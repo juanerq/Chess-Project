@@ -1,8 +1,9 @@
 import { colorPiece, paintOptions } from "../js/other-functions.js";
 
+let validate = false;
+
 export function logicTower(rowSelec, columnSelec, piece) {   
 
-    let validate = false;
     const counters = {
         left:  { status: false, cont: piece.column },
         right: { status: false, cont: piece.column },
@@ -17,10 +18,10 @@ export function logicTower(rowSelec, columnSelec, piece) {
         if( !counters.right.status ) counters.right.cont += 1;
         if( !counters.down.status  ) counters.down.cont  += 1;
 
-        towerOptions( counters.left  , piece.row          , counters.left.cont  , columnSelec, rowSelec );
-        towerOptions( counters.right , piece.row          , counters.right.cont , columnSelec, rowSelec );
-        towerOptions( counters.top   , counters.top.cont  , piece.column        , columnSelec, rowSelec );
-        towerOptions( counters.down  , counters.down.cont , piece.column        , columnSelec, rowSelec );
+        towerOptions( counters.left  , piece.row          , counters.left.cont  , columnSelec , rowSelec );
+        towerOptions( counters.right , piece.row          , counters.right.cont , columnSelec , rowSelec );
+        towerOptions( counters.top   , counters.top.cont  , piece.column        , columnSelec , rowSelec );
+        towerOptions( counters.down  , counters.down.cont , piece.column        , columnSelec , rowSelec );
           
     }
     return validate;
