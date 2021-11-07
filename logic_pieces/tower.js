@@ -1,9 +1,9 @@
 import { colorPiece, paintOptions } from "../js/other-functions.js";
 
-let validate = false;
+let validate;
 
 export function logicTower(rowSelec, columnSelec, piece) {   
-
+    validate = false;
     const counters = {
         left:  { status: false, cont: piece.column },
         right: { status: false, cont: piece.column },

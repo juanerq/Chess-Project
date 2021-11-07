@@ -1,40 +1,52 @@
 import { colorPiece, paintOptions } from "../js/other-functions.js";
 
 export function logicPawn(rowSelec, columnSelec, piece) {
-    console.log(piece);
+
     let color = colorPiece(piece.piece);
 
-    const posSquares = {
+    const pos = {
         square1: 0,
         square2: 0,
         column: piece.column
     }
 
     if(color == 'white'){
-        posSquares.square1 = piece.row - 1;
-        posSquares.square2 = piece.row - 2;
+        pos.square1 = piece.row - 1;
+        pos.square2 = piece.row - 2;
     }else if(color == 'black'){
-        posSquares.square1 = piece.row + 1;
-        posSquares.square2 = piece.row + 2;
+        pos.square1 = piece.row + 1;
+        pos.square2 = piece.row + 2;
     }
 
 
-    if( piece.row != CHESS.length - 2 || piece.row != 1 ){
-        if(posSquares.square1 >= 0 && posSquares.square1 < CONFIG_CHESS.num_rows){
-            paintOptions(CHESS[posSquares.square1][posSquares.column], CHESS_VIEW[posSquares.square1][posSquares.column], GAME_PROGRESS.turn);
-            if( rowSelec == (posSquares.square1) && columnSelec == posSquares.column ) return true;
-        }
+    // Pintar primer cuadro
+    if(CHESS[pos.square1][pos.column].split(" ").join("").length == 0 
+    && pos.square1 >= 0 && pos.square1 < CONFIG_CHESS.num_rows){
+
+        paintOptions(CHESS[pos.square1][pos.column], CHESS_VIEW[pos.square1][pos.column], GAME_PROGRESS.turn);
+        if( rowSelec == (pos.square1) && columnSelec == pos.column ) return true;
     }
+    // Si el peon no se ha movido antes pintar el segundo cuadro si ambos estan vacios 
     if(piece.row == CHESS.length - 2 || piece.row == 1){
-        if(posSquares.square1 >= 0 && posSquares.square1 < CONFIG_CHESS.num_rows){
-            paintOptions(CHESS[posSquares.square1][posSquares.column], CHESS_VIEW[posSquares.square1][posSquares.column], GAME_PROGRESS.turn);
-            if( (rowSelec == (posSquares.square1) && columnSelec == posSquares.column )) return true;
-        }
+        if(CHESS[pos.square1][pos.column].split(" ").join("").length == 0 && pos.square1 >= 0 && pos.square1 < CONFIG_CHESS.num_rows && CHESS[pos.square2][pos.column].split(" ").join("").length == 0 && pos.square2 >= 0 && pos.square2 < CONFIG_CHESS.num_rows ) {
 
-        if(CHESS[posSquares.square1][posSquares.column].split(" ").join("").length == 0 && posSquares.square2 >= 0 && posSquares.square2 < CONFIG_CHESS.num_rows ){
-            paintOptions(CHESS[posSquares.square2][posSquares.column], CHESS_VIEW[posSquares.square2][posSquares.column], GAME_PROGRESS.turn);
-            if( (rowSelec == (posSquares.square2)) && columnSelec == posSquares.column ) return true;
+            paintOptions(CHESS[pos.square2][pos.column], CHESS_VIEW[pos.square2][pos.column], GAME_PROGRESS.turn);
+            if( (rowSelec == (pos.square2)) && columnSelec == pos.column ) return true;
         }
     }
+
+    if(CHESS[pos.square1][piece.column + 1].split(" ").join("").length != 0 ) {
+        paintOptions(CHESS[pos.square1][piece.column + 1], CHESS_VIEW[pos.square1][piece.column + 1], GAME_PROGRESS.turn);
+        if(rowSelec == pos.square1 && columnSelec == piece.column + 1) return true;
+        
+    }
+    if(CHESS[pos.square1][piece.column - 1].split(" ").join("").length != 0 ) {
+        paintOptions(CHESS[pos.square1][piece.column - 1], CHESS_VIEW[pos.square1][piece.column - 1], GAME_PROGRESS.turn);
+        if(rowSelec == pos.square1 && columnSelec == piece.column - 1) return true;
+    }
+
     return false;
 }
+
+
+

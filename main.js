@@ -8,6 +8,7 @@ import { updatePositionPieces } from './js/updatePositionPieces.js';
 import { logicPawn } from './logic_pieces/pawn.js';
 import { logicHorse } from './logic_pieces/horse.js';
 import { logicTower } from './logic_pieces/tower.js';
+import { logicBishop } from './logic_pieces/bishop.js';
 
 HTML_TAGS.submit_size.addEventListener('click', validateSizeChess);
 
@@ -53,9 +54,9 @@ function validatePieceMovement(piece){
         case 'B-P': case 'W-P': return logicPawn(CHOSEN_POSITION.row, CHOSEN_POSITION.column, CHOSEN_PIECE);
         case 'B-T': case 'W-T': return logicTower(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
         case 'B-H': case 'W-H': return logicHorse(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
-        case 'B-B': case 'W-B': break;
-        case 'B-Q': case 'W-Q': break;
-        case 'B-K': case 'W-K': break;
+        case 'B-B': case 'W-B': return logicBishop(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
+        case 'B-Q': case 'W-Q': return true;
+        case 'B-K': case 'W-K': return true;
         
         default: return true;
     }
