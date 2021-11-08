@@ -35,12 +35,12 @@ export function logicPawn(rowSelec, columnSelec, piece) {
         }
     }
 
-    if(CHESS[pos.square1][piece.column + 1].split(" ").join("").length != 0 ) {
+    if((piece.column + 1) < CONFIG_CHESS.num_columns && CHESS[pos.square1][piece.column + 1].split(" ").join("").length != 0 ) {
         paintOptions(CHESS[pos.square1][piece.column + 1], CHESS_VIEW[pos.square1][piece.column + 1], GAME_PROGRESS.turn);
         if(rowSelec == pos.square1 && columnSelec == piece.column + 1) return true;
         
     }
-    if(CHESS[pos.square1][piece.column - 1].split(" ").join("").length != 0 ) {
+    if((piece.column - 1) >= 0 && CHESS[pos.square1][piece.column - 1].split(" ").join("").length != 0 ) {
         paintOptions(CHESS[pos.square1][piece.column - 1], CHESS_VIEW[pos.square1][piece.column - 1], GAME_PROGRESS.turn);
         if(rowSelec == pos.square1 && columnSelec == piece.column - 1) return true;
     }

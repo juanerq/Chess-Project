@@ -1,10 +1,13 @@
 import { colorPiece, paintOptions } from "../js/other-functions.js";
 
-export function calculateOptions( direction, row, column, columnSelec, rowSelec, validate ){
+export let validate = {status: false}; 
+
+export function calculateOptions( direction, row, column, columnSelec, rowSelec ){
 
     if( row >= 0 && row < CONFIG_CHESS.num_rows && column >= 0 && column < CONFIG_CHESS.num_columns ){
-        if(columnSelec == column && rowSelec == row) return validate = true;
-        
+
+        if(columnSelec == column && rowSelec == row) return validate.status = true;
+
         if( !direction.status ){
             let color = colorPiece( CHESS[row][column] );
             

@@ -9,7 +9,8 @@ const HTML_TAGS = {
     message_column: document.getElementById('message_column'),
     message_row: document.getElementById('message_row'),
 
-    CONTAINER_CHESS: document.getElementById('chess'),
+    CONTAINER_CHESS: document.querySelector('.container_chess'),
+    CONTAINER_PIECES: document.getElementById('container_pieces'),
     PIECES: document.getElementsByClassName('column'),
 
     deadPiecesWhite: document.getElementById('dead_pieces_white'),

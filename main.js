@@ -27,7 +27,7 @@ function cleanGame(){
     CHOSEN_PIECE.piece = '';
 
     // Eliminar tablero y piezas muertas del HTML
-    HTML_TAGS.CONTAINER_CHESS.innerHTML = '';
+    HTML_TAGS.CONTAINER_PIECES.innerHTML = '';
     HTML_TAGS.deadPiecesWhite.innerHTML = '';
     HTML_TAGS.deadPiecesBlack.innerHTML = '';
     HTML_TAGS.ctx.clearRect(0, 0, HTML_TAGS.canvas.width, HTML_TAGS.canvas.height);

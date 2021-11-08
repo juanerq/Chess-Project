@@ -3,6 +3,8 @@ import { changeToFigures } from './other-functions.js';
 
 //--------> ORDENAR PIEZAS EN PANTALLA <--------//
 function createLabelsPieces(){
+
+    HTML_TAGS.CONTAINER_CHESS.style.border = '3px solid #06adf7';
     const fragment = document.createDocumentFragment();
 
     for(let indexRow = 0; indexRow < CONFIG_CHESS.num_rows; indexRow++){
@@ -27,7 +29,7 @@ function createLabelsPieces(){
         }
         fragment.appendChild(row);
     }
-    HTML_TAGS.CONTAINER_CHESS.appendChild(fragment);
+    HTML_TAGS.CONTAINER_PIECES.appendChild(fragment);
 } 
 
 
