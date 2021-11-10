@@ -12,12 +12,15 @@ body{
 
 .container_chess{
     display: flex;
+    transition: all .5s;
+    position: relative;
 }
 #container_pieces{
     position: absolute; 
     z-index: 100;
     display: flex;
     flex-direction: column;
+    /* pointer-events: none; */
 }
 .row{
     display: flex;
@@ -29,7 +32,6 @@ body{
 
 .column:hover{
     background-color: #0da2ef;
-    
 }
 .container{
     width: 500px;

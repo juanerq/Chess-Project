@@ -1,0 +1,36 @@
+#formModal{
+    display: none; 
+    justify-content: space-evenly;
+    line-height: 45px;
+
+    z-index: 100;
+    width: 280px;
+    height: 60px;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 4px 3px #00000065;
+    opacity: 0.91;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+.selecPieces input{
+    display: none;
+}
+.selecPieces label{
+    margin: 0 8px;
+    font-size: 50px;
+    font-weight: 100;
+    color: rgb(22, 22, 22);
+    cursor: pointer;
+}
+
+.selecPieces label:hover {
+    color: #0091bd;
+}

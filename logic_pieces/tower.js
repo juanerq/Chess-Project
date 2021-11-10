@@ -2,6 +2,7 @@ import { calculateOptions, validate } from './functions.js';
 
 export function logicTower(rowSelec, columnSelec, piece) {   
     validate.status = false;
+
     const counters = {
         left:  { status: false, cont: piece.column },
         right: { status: false, cont: piece.column },

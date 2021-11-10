@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./img/horse.png" type="image/x-icon">
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/modal.css">
     <title>Chess</title>
 </head>
 <body>
@@ -30,10 +31,35 @@
         <div id="dead_pieces_black"></div>
     </div>
 
-    <div class="container_chess">
+    <section class="container_chess">
         <div id="container_pieces"></div>
         <canvas id="canvas"></canvas>
-    </div>
+
+        <form name="formPiece" id="formModal">
+            <div class="selecPieces">
+                <input type="radio" name="changePiece" value="B-Q" id="B-Q">
+                <label for="B-Q">♛</label>
+                <input type="radio" name="changePiece" value="B-T" id="B-T">
+                <label for="B-T">♜</label>
+                <input type="radio" name="changePiece" value="B-H" id="B-H">
+                <label for="B-H">♞</label>
+                <input type="radio" name="changePiece" value="B-B" id="B-B">
+                <label for="B-B">♝</label>
+            </div>
+
+            <div class="selecPieces">
+                <input type="radio" name="changePiece" value="W-Q" id="W-Q">
+                <label for="W-Q">♕</label>
+                <input type="radio" name="changePiece" value="W-T" id="W-T">
+                <label for="W-T">♖</label>
+                <input type="radio" name="changePiece" value="W-H" id="W-H">
+                <label for="W-H">♘</label>
+                <input type="radio" name="changePiece" value="W-B" id="W-B">
+                <label for="W-B">♗</label>
+            </div>
+        </form>
+
+    </section>
 
 
     <script src="./variables.js"></script>

@@ -1,6 +1,6 @@
 import { createGameChess } from '../main.js';
 
-function validateSizeChess(size){
+function validateSizeChess(){
    
     HTML_TAGS.message_column.innerHTML = '';
     HTML_TAGS.message_row.innerHTML = '';

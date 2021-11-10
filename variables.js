@@ -14,7 +14,10 @@ const HTML_TAGS = {
     PIECES: document.getElementsByClassName('column'),
 
     deadPiecesWhite: document.getElementById('dead_pieces_white'),
-    deadPiecesBlack: document.getElementById('dead_pieces_black')
+    deadPiecesBlack: document.getElementById('dead_pieces_black'),
+
+    formModal: document.getElementById('formModal'), 
+    selecPieces: document.querySelectorAll('.selecPieces')
 }
 
 const CHESS = [];
@@ -26,6 +29,22 @@ const listLetter = [];
 const PIECES_BLACK = ['B-P', 'B-T', 'B-H', 'B-B', 'B-K', 'B-Q'];                     
 const PIECES_WHITE = ['W-P', 'W-T', 'W-H', 'W-B', 'W-K', 'W-Q'];
 
+const piecesBlack = {
+    'B-P': 8, 
+    'B-T': 2, 
+    'B-H': 2, 
+    'B-B': 2, 
+    'B-K': 1, 
+    'B-Q': 1
+};                     
+const piecesWhite = {
+    'B-P': 8, 
+    'B-T': 2, 
+    'B-H': 2, 
+    'B-B': 2, 
+    'B-K': 1, 
+    'B-Q': 1
+};    
 
 const CONFIG_CHESS = {
     num_columns: 0,
@@ -46,38 +65,13 @@ const GAME_PROGRESS = {
 }
 
 const CHOSEN_PIECE = {
-    row: 0,
-    column: 0,
+    row: null,
+    column: null,
     piece: ''
 };
 const CHOSEN_POSITION = {
-    row: 0,
-    column: 0,
+    row: null,
+    column: null,
     position: ''
 };
-
-
-const POSITION_PIECES_BLACK = {
-    towerleft: '',
-    knightleft: '',
-    bishopleft: '',
-    queen: '',
-    king: '',
-    bishopright: '',
-    knightright: '',
-    towerright: '',
-    pawns: []
-}
-
-const POSITION_PIECES_WHITE = {
-    towerleft: '',
-    knightleft: '',
-    bishopleft: '',
-    queen: '',
-    king: '',
-    bishopright: '',
-    knightright: '',
-    towerright: '',
-    pawns: []
-}
 

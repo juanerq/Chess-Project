@@ -3,12 +3,13 @@ import { validateSizeChess } from './js/validate-size.js'
 import { createChessArray, putPiecesArray } from './js/create-chessArray.js'
 import { sizeChessCanvas } from './js/create-canvas.js';
 import { orderPiecesScreen, createLabelsPieces } from './js/order-PiecesScreen.js';
-import { updatePositionPieces } from './js/updatePositionPieces.js';
 
 import { logicPawn } from './logic_pieces/pawn.js';
 import { logicHorse } from './logic_pieces/horse.js';
 import { logicTower } from './logic_pieces/tower.js';
 import { logicBishop } from './logic_pieces/bishop.js';
+import { logicQueen } from './logic_pieces/queen.js';
+import { logicKing } from './logic_pieces/king.js';
 
 HTML_TAGS.submit_size.addEventListener('click', validateSizeChess);
 
@@ -42,12 +43,11 @@ function createGameChess(){
     sizeChessCanvas();
     createLabelsPieces();
     orderPiecesScreen(CHESS);
-    printChess(listLetter, CHESS, GAME_PROGRESS);
+    // printChess(listLetter, CHESS, GAME_PROGRESS);
 }
 
 
 //----------------------------------[ VALIDACION DE PIEZAS ]--------------------------------------//
-
 
 function validatePieceMovement(piece){
     switch (piece) {
@@ -55,14 +55,14 @@ function validatePieceMovement(piece){
         case 'B-T': case 'W-T': return logicTower(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
         case 'B-H': case 'W-H': return logicHorse(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
         case 'B-B': case 'W-B': return logicBishop(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
-        case 'B-Q': case 'W-Q': return true;
-        case 'B-K': case 'W-K': return true;
+        case 'B-Q': case 'W-Q': return logicQueen(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
+        case 'B-K': case 'W-K': return logicKing(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
         
         default: return true;
     }
 }
 
 
-export { createGameChess, updatePositionPieces, validatePieceMovement };
+export { createGameChess, validatePieceMovement };
 
 

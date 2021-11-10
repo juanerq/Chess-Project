@@ -12,6 +12,7 @@ function changeToFigures(array){
     }
 }
 
+
 //--------> IDENTIFICAR EL COLOR DE UNA PIEZA <--------//
 
 function colorPiece(piece){
@@ -45,7 +46,7 @@ function printChess(listLetter, chess, GAME_PROGRESS){
     for(let index in chess){
         console.log(`[${chess[index]}] ${1 + parseInt(index)}`);
     }
-    console.log(`[ Fichas comidad ]
+    console.log(`[ Fichas comidas ]
 White => ${GAME_PROGRESS.deadPiecesWhite} 
 Black => ${GAME_PROGRESS.deadPiecesBlack}`);
 }
@@ -67,7 +68,6 @@ function errorColorRed(posError) {
 //--------> PINTAR CAMPOS VACIOS Y PIEZAS DEL OTRO EQUIPO QUE SE PUEDEN COMER <--------//
 
 function paintOptions(piece, tag, turn){
-
     let color = colorPiece(piece);
     if(color != turn){
         tag.style.backgroundColor = 'orange';
@@ -75,7 +75,6 @@ function paintOptions(piece, tag, turn){
     if(tag.innerHTML.split(" ").join("").length == 0){
         tag.style.backgroundColor = 'yellow';
     }
-
 }
 
 export { changeToFigures, printChess, orderPieces, errorColorRed, colorPiece, paintOptions };
