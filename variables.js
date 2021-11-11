@@ -29,23 +29,6 @@ const listLetter = [];
 const PIECES_BLACK = ['B-P', 'B-T', 'B-H', 'B-B', 'B-K', 'B-Q'];                     
 const PIECES_WHITE = ['W-P', 'W-T', 'W-H', 'W-B', 'W-K', 'W-Q'];
 
-const piecesBlack = {
-    'B-P': 8, 
-    'B-T': 2, 
-    'B-H': 2, 
-    'B-B': 2, 
-    'B-K': 1, 
-    'B-Q': 1
-};                     
-const piecesWhite = {
-    'B-P': 8, 
-    'B-T': 2, 
-    'B-H': 2, 
-    'B-B': 2, 
-    'B-K': 1, 
-    'B-Q': 1
-};    
-
 const CONFIG_CHESS = {
     num_columns: 0,
     num_rows: 0,
@@ -55,7 +38,10 @@ const CONFIG_CHESS = {
 
     color_square1: '#e1d0eb',
     color_square2: '#735594',
-    colorSelectSquare: '#0da2ef'
+    colorSelectSquare: '#0da2ef',
+
+    color_circlePiece: '#ff0000',
+    color_circlePosition: '#ffd400'
 }
 
 const GAME_PROGRESS = {

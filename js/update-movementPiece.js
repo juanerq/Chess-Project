@@ -1,6 +1,4 @@
-import { changeToFigures, printChess } from './other-functions.js';
-
-let pieceSelec = { piece: null }
+import { changeToFigures } from './other-functions.js';
 
 export function updateMovement(piece, position){
 

@@ -1,5 +1,5 @@
 import { validatePieceMovement } from '../main.js';
-import { changeToFigures, errorColorRed } from './other-functions.js';
+import { changeToFigures, errorColorRed, removeRest } from './other-functions.js';
 import { updateMovement } from './update-movementPiece.js'
 
 export function validateChosen(){
@@ -9,9 +9,7 @@ export function validateChosen(){
     // si da click a la misma pieza una vez mas se deseleccionara
     if(CHOSEN_POSITION.row == CHOSEN_PIECE.row && CHOSEN_POSITION.column == CHOSEN_PIECE.column){
         // Se quita el color(cualquier color) de todos los campos
-        for(const element of HTML_TAGS.PIECES){
-            element.style.backgroundColor = '';    
-        }
+        removeRest();
         console.log(`pieza deseleccionada ${chosenPosition}`);
         // Se borra la pieza seleccionada
         CHOSEN_PIECE.piece = '';
@@ -36,9 +34,7 @@ export function validateChosen(){
         return errorColorRed(CHOSEN_POSITION);
     }else{
         console.log(`Buen movimiento ${CHOSEN_PIECE.piece}`);
-        for(const element of HTML_TAGS.PIECES){
-            element.style.backgroundColor = '';    
-        }
+        removeRest();
     }
 
     // Matar pieza

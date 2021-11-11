@@ -28,6 +28,17 @@ body{
 .column{
     cursor: pointer;
     text-align: center;
+    position: relative;
+}
+.fa-circle{
+    position: absolute;
+    font-size: 70%;
+    padding: 23% 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 .column:hover{

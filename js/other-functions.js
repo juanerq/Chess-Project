@@ -59,23 +59,48 @@ function errorColorRed(posError) {
     setTimeout(() => {
         for(const element of HTML_TAGS.PIECES){
             if(element.style.backgroundColor == 'red'){
-                return element.style.backgroundColor = '';;                
+                return element.style.backgroundColor = '';                
             }
         } 
     }, 300);
 }
 
-//--------> PINTAR CAMPOS VACIOS Y PIEZAS DEL OTRO EQUIPO QUE SE PUEDEN COMER <--------//
+//--------> ELIMINAR CIRCULOS Y COLORES (RESTO) DE LAS ETIQUETAS <--------//
 
-function paintOptions(piece, tag, turn){
-    let color = colorPiece(piece);
-    if(color != turn){
-        tag.style.backgroundColor = 'orange';
-    }
-    if(tag.innerHTML.split(" ").join("").length == 0){
-        tag.style.backgroundColor = 'yellow';
+function removeRest(){
+    for(const element of HTML_TAGS.PIECES){
+        element.style.backgroundColor = '';    
+        let pieceHTML = element.innerHTML[0] == '<' || !element.innerHTML ? '' : element.innerHTML[0]
+        element.innerHTML = pieceHTML;
     }
 }
 
-export { changeToFigures, printChess, orderPieces, errorColorRed, colorPiece, paintOptions };
+//--------> PINTAR CAMPOS VACIOS Y PIEZAS DEL OTRO EQUIPO QUE SE PUEDEN COMER <--------//
+
+// function paintOptions(piece, tag, turn){
+//     let color = colorPiece(piece);
+//     if(color != turn){
+//         tag.style.backgroundColor = 'orange';
+//     }
+//     if(tag.innerHTML.split(" ").join("").length == 0){
+//         tag.style.backgroundColor = 'yellow';
+//     }
+// }
+
+function paintOptions(piece, tag, turn){
+    let color = colorPiece(piece);
+    const circlePiece = `<div class="fas fa-circle" style="color:${CONFIG_CHESS.color_circlePiece}; opacity: .6;"></div>`
+    const circlePosition = `<div class="fas fa-circle" style="color:${CONFIG_CHESS.color_circlePosition};"></div>`;
+
+    // Si no hay ficha en el campo
+    if(tag.innerHTML.split(" ").join("").length == 0 || tag.innerHTML == circlePosition){
+        return tag.innerHTML = circlePosition;
+    }
+    // Si hay una ficha del equipo contrario en el campo
+    if(color != turn){   
+        return tag.innerHTML += circlePiece;
+    }
+}
+
+export { changeToFigures, printChess, orderPieces, errorColorRed, colorPiece, paintOptions, removeRest };
 
