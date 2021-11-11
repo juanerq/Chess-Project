@@ -20,7 +20,6 @@ body{
     z-index: 100;
     display: flex;
     flex-direction: column;
-    /* pointer-events: none; */
 }
 .row{
     display: flex;
@@ -29,7 +28,16 @@ body{
     cursor: pointer;
     text-align: center;
     position: relative;
+
 }
+/* .column div{
+    font-weight: 500;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: #000;
+} */
 .fa-circle{
     position: absolute;
     font-size: 70%;
@@ -42,14 +50,13 @@ body{
 }
 
 .column:hover{
-    background-color: #0da2ef;
+    background-color: #ff00b3;
 }
 .container{
     width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 #dead_pieces_white, #dead_pieces_black{
     width: 300px;

@@ -1,5 +1,5 @@
 import { movePiece } from './validate-move.js'
-import { changeToFigures } from './other-functions.js';
+import { changeToFigures, colorPiece } from './other-functions.js';
 
 //--------> ORDENAR PIEZAS EN PANTALLA <--------//
 function createLabelsPieces(){
@@ -7,13 +7,13 @@ function createLabelsPieces(){
     HTML_TAGS.CONTAINER_CHESS.style.border = '4px solid #06adf7';
     const fragment = document.createDocumentFragment();
 
-    for(let indexRow = 0; indexRow < CONFIG_CHESS.num_rows; indexRow++){
+    for(let iRow = 0; iRow < CONFIG_CHESS.num_rows; iRow++){
 
         const row = document.createElement('div');
         row.className = 'row';
-        CHESS_VIEW[indexRow] = [];
+        CHESS_VIEW[iRow] = [];
 
-        for(let indexColumn = 0; indexColumn < CONFIG_CHESS.num_columns; indexColumn++){
+        for(let iColumn = 0; iColumn < CONFIG_CHESS.num_columns; iColumn++){
 
             const column = document.createElement('div');
             column.className = 'column';
@@ -23,7 +23,7 @@ function createLabelsPieces(){
             column.style.fontSize = `${CONFIG_CHESS.size_piece}px`;
             column.style.lineHeight = `${CONFIG_CHESS.size_square}px`;
 
-            CHESS_VIEW[indexRow][indexColumn] = column;
+            CHESS_VIEW[iRow][iColumn] = column;
             row.appendChild(column);
 
         }
@@ -33,20 +33,46 @@ function createLabelsPieces(){
 } 
 
 
+// function orderPiecesScreen(){
+    
+//     for(let iRow = 0; iRow < CONFIG_CHESS.num_rows; iRow++){
+
+//         for(let iColumn = 0; iColumn < CONFIG_CHESS.num_columns; iColumn++){
+    
+//             // Ingresar fichas y espacios en blanco a la cada etiqueta
+//             CHESS_VIEW[iRow][iColumn].innerHTML = changeToFigures(CHESS[iRow][iColumn]);
+    
+//             CHESS_VIEW[iRow][iColumn].addEventListener('click', () => {
+//                 return movePiece(iRow, iColumn, CHESS_VIEW[iRow][iColumn], CHESS);
+//             })
+//         }
+//     }
+// }
+
 function orderPiecesScreen(){
     
-    for(let indexRow = 0; indexRow < CONFIG_CHESS.num_rows; indexRow++){
+    for(let iRow = 0; iRow < CONFIG_CHESS.num_rows; iRow++){
 
-        for(let indexColumn = 0; indexColumn < CONFIG_CHESS.num_columns; indexColumn++){
+        for(let iColumn = 0; iColumn < CONFIG_CHESS.num_columns; iColumn++){
     
+            // let color = colorPiece(CHESS[iRow][iColumn])
+            // if(color == 'white'){
+            //     let changeColor = changeToFigures(CHESS[iRow][iColumn].replace('W', 'B'))
+            //     CHESS_VIEW[iRow][iColumn].innerHTML = `${changeColor}<div>${changeToFigures(CHESS[iRow][iColumn])}</div>`;
+            // }else{
+                // CHESS_VIEW[iRow][iColumn].innerHTML = changeToFigures(CHESS[iRow][iColumn]);
+            // }
+            
             // Ingresar fichas y espacios en blanco a la cada etiqueta
-            CHESS_VIEW[indexRow][indexColumn].innerHTML = changeToFigures(CHESS[indexRow][indexColumn]);
+
+            CHESS_VIEW[iRow][iColumn].innerHTML = changeToFigures(CHESS[iRow][iColumn]);
     
-            CHESS_VIEW[indexRow][indexColumn].addEventListener('click', () => {
-                return movePiece(indexRow, indexColumn, CHESS_VIEW[indexRow][indexColumn], CHESS);
+            CHESS_VIEW[iRow][iColumn].addEventListener('click', () => {
+                return movePiece(iRow, iColumn, CHESS_VIEW[iRow][iColumn], CHESS);
             })
         }
     }
 }
+
 
 export { orderPiecesScreen, createLabelsPieces };

@@ -20,9 +20,13 @@ export function updateMovement(piece, position){
     if(GAME_PROGRESS.turn == 'white'){
         GAME_PROGRESS.turn = 'black';
         HTML_TAGS.CONTAINER_CHESS.style.border = '4px solid #fff500';
+        CONFIG_CHESS.color_circlePosition = '#fff500';
+        CONFIG_CHESS.colorSelectSquare = '#fff500';
     }else if(GAME_PROGRESS.turn == 'black'){
         GAME_PROGRESS.turn = 'white';
         HTML_TAGS.CONTAINER_CHESS.style.border = '4px solid #06adf7';
+        CONFIG_CHESS.color_circlePosition = '#06adf7';
+        CONFIG_CHESS.colorSelectSquare = '#06adf7';
     }
 
     // printChess(listLetter, CHESS, GAME_PROGRESS);

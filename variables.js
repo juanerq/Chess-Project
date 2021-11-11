@@ -41,7 +41,7 @@ const CONFIG_CHESS = {
     colorSelectSquare: '#0da2ef',
 
     color_circlePiece: '#ff0000',
-    color_circlePosition: '#ffd400'
+    color_circlePosition: '#06adf7'
 }
 
 const GAME_PROGRESS = {
