@@ -1,10 +1,9 @@
-import { colorPiece, paintOptions, changeToFigures } from "../js/other-functions.js";
+import { colorPiece, changeToFigures } from "../js/other-functions.js";
 
 let rowSelecPiece;
 let columnSelecPiece;
 
 export function logicPawn(rowSelec, columnSelec, piece) {
-    
     let color = colorPiece(piece.piece);
 
     rowSelecPiece = rowSelec;
@@ -28,8 +27,8 @@ export function logicPawn(rowSelec, columnSelec, piece) {
         // Pintar primer cuadro
         if(CHESS[pos.square1][pos.column].split(" ").join("").length == 0){
 
-            paintOptions(CHESS[pos.square1][pos.column], CHESS_VIEW[pos.square1][pos.column], GAME_PROGRESS.turn);
-         
+            // paintOptions(CHESS[pos.square1][pos.column], CHESS_VIEW[pos.square1][pos.column], GAME_PROGRESS.turn);
+            MOTION_OPTIONS.push(`${pos.square1},${pos.column}`)
             if( rowSelec == (pos.square1) && columnSelec == pos.column ) {
                 showFormModal()
                 return true;
@@ -41,14 +40,14 @@ export function logicPawn(rowSelec, columnSelec, piece) {
 
                 if(CHESS[pos.square1][pos.column].split(" ").join("").length == 0 && CHESS[pos.square2][pos.column].split(" ").join("").length == 0 ) {
         
-                    paintOptions(CHESS[pos.square2][pos.column], CHESS_VIEW[pos.square2][pos.column], GAME_PROGRESS.turn);
+                    MOTION_OPTIONS.push(`${pos.square2},${pos.column}`)
                     if( (rowSelec == (pos.square2)) && columnSelec == pos.column ) return true;
                 }
             }
         }
 
         if((piece.column + 1) < CONFIG_CHESS.num_columns && CHESS[pos.square1][piece.column + 1].split(" ").join("").length != 0 ) {
-            paintOptions(CHESS[pos.square1][piece.column + 1], CHESS_VIEW[pos.square1][piece.column + 1], GAME_PROGRESS.turn);
+            MOTION_OPTIONS.push(`${pos.square1},${pos.column + 1}`)
             if(rowSelec == pos.square1 && columnSelec == piece.column + 1) {
                 showFormModal()
                 return true;
@@ -56,7 +55,7 @@ export function logicPawn(rowSelec, columnSelec, piece) {
         }
 
         if(pos.square1 >= 0 && (piece.column - 1) >= 0 && CHESS[pos.square1][piece.column - 1].split(" ").join("").length != 0 ) {
-            paintOptions(CHESS[pos.square1][piece.column - 1], CHESS_VIEW[pos.square1][piece.column - 1], GAME_PROGRESS.turn);
+            MOTION_OPTIONS.push(`${pos.square1},${pos.column - 1}`)
             if(rowSelec == pos.square1 && columnSelec == piece.column - 1) {
                 showFormModal()
                 return true;

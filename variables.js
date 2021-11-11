@@ -54,10 +54,12 @@ const CHOSEN_PIECE = {
     row: null,
     column: null,
     piece: ''
-};
+}
+
 const CHOSEN_POSITION = {
     row: null,
     column: null,
     position: ''
-};
+}
 
+const MOTION_OPTIONS = [];

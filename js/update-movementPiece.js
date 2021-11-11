@@ -17,6 +17,8 @@ export function updateMovement(piece, position){
     position.column = null;
     position.position = '';
     
+    MOTION_OPTIONS.length = 0;
+
     if(GAME_PROGRESS.turn == 'white'){
         GAME_PROGRESS.turn = 'black';
         HTML_TAGS.CONTAINER_CHESS.style.border = '4px solid #fff500';

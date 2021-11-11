@@ -1,5 +1,3 @@
-import { paintOptions } from "../js/other-functions.js";
-
 export function logicHorse(rowSelec, columnSelec, piece) {
     let correctMove = false;
     for(const rows in CHESS){
@@ -7,7 +5,7 @@ export function logicHorse(rowSelec, columnSelec, piece) {
             let validateChosen = horseOptions(rows, columns, piece);
             if(validateChosen){
                 
-                paintOptions( CHESS[rows][columns], CHESS_VIEW[rows][columns], GAME_PROGRESS.turn );
+                MOTION_OPTIONS.push(`${rows},${columns}`)
                 
                 if(rowSelec == rows && columnSelec == columns && correctMove == false){
                     correctMove = true;
@@ -27,7 +25,6 @@ function horseOptions(rowSelec, columnSelec, posCaballo){
             rowSelec == (posCaballo.row - 1) || rowSelec == (posCaballo.row + 1)){
                 return true;
         }
-
     }   
     return false; 
 }

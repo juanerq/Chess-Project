@@ -10,12 +10,14 @@ export function validateChosen(){
     if(CHOSEN_POSITION.row == CHOSEN_PIECE.row && CHOSEN_POSITION.column == CHOSEN_PIECE.column){
         // Se quita el color(cualquier color) de todos los campos
         removeRest();
-        console.log(`pieza deseleccionada ${chosenPosition}`);
+        // console.log(`pieza deseleccionada ${chosenPosition}`);
         // Se borra la pieza seleccionada
         CHOSEN_PIECE.piece = '';
         // Se borra la posición del campo seleccionado
         CHOSEN_POSITION.column = null;
         CHOSEN_POSITION.row = null;
+        // Se eliminan las posibles opciones de la pieza
+        MOTION_OPTIONS.length = 0;
         return 
     }
     // La pieza atrapada se busca en los arrays de piezas blancas o negras
@@ -24,16 +26,16 @@ export function validateChosen(){
 
     // Si el campo esta lleno o no es una pieza del equipo contrario ocurrira un error
     if(chosenPosition.split(" ").join("").length != 0 && trappedPiece == -1){
-        console.log('Selecciona un campo vacio');
+        // console.log('Selecciona un campo vacio');
         return errorColorRed(CHOSEN_POSITION);
     }
 
     let result = validatePieceMovement(CHOSEN_PIECE.piece);
     if(!result){
-        console.log(`El movimiento no es valido para esta pieza ${CHOSEN_PIECE.piece}`);
+        // console.log(`El movimiento no es valido para esta pieza ${CHOSEN_PIECE.piece}`);
         return errorColorRed(CHOSEN_POSITION);
     }else{
-        console.log(`Buen movimiento ${CHOSEN_PIECE.piece}`);
+        // console.log(`Buen movimiento ${CHOSEN_PIECE.piece}`);
         removeRest();
     }
 
