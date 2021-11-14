@@ -63,3 +63,4 @@ const CHOSEN_POSITION = {
 }
 
 const MOTION_OPTIONS = [];
+const OPTIONS_KILL = [];

@@ -1,6 +1,6 @@
 //--------> CAMBIAR LETRAS A FICHAS <--------//
 
-function changeToFigures(array){
+export function changeToFigures(array){
     switch (array) {
         case 'B-P': case 'W-P': if(array == 'B-P'){return'♟'} return '♙'
         case 'B-T': case 'W-T': if(array == 'B-T'){return'♜'} return '♖'
@@ -15,7 +15,7 @@ function changeToFigures(array){
 
 //--------> IDENTIFICAR EL COLOR DE UNA PIEZA <--------//
 
-function colorPiece(piece){
+export function colorPiece(piece){
     let result;
     const BLACK = ['B-P', 'B-T', 'B-H', 'B-B', 'B-K', 'B-Q', '♟', '♜', '♞', '♝', '♛', '♚'];                     
     const WHITE = ['W-P', 'W-T', 'W-H', 'W-B', 'W-K', 'W-Q', '♙', '♖', '♘', '♗', '♕', '♔'];
@@ -23,11 +23,12 @@ function colorPiece(piece){
     if(result) return 'black' 
     result = WHITE.find(element => element == piece);
     if(result) return 'white'
+    return ''
 }
 
 //--------> ORDENAS PIEZAS <--------//
 
-function orderPieces(posPieces, colorPiece = 'white'){
+export function orderPieces(posPieces, colorPiece = 'white'){
     switch (posPieces) {
         case 9:          if(colorPiece == 'black') return 'B-P';  return 'W-P'; //Peón
         case 1: case 8:  if(colorPiece == 'black') return 'B-T';  return 'W-T'; //Torre
@@ -41,7 +42,7 @@ function orderPieces(posPieces, colorPiece = 'white'){
 
 //--------> IMPRIMIR TABLERO <--------//
 
-function printChess(listLetter, chess, GAME_PROGRESS){
+export function printChess(listLetter, chess, GAME_PROGRESS){
     console.log(`[${listLetter}]`);
     for(let index in chess){
         console.log(`[${chess[index]}] ${1 + parseInt(index)}`);
@@ -53,7 +54,7 @@ Black => ${GAME_PROGRESS.deadPiecesBlack}`);
 
 //--------> VISUALIZAR ( COLOR ROJO ) CUANDO NO SE PUEDE SELECCIONA UN CAMPO <--------//
 
-function errorColorRed(posError) {
+export function errorColorRed(posError) {
     CHESS_VIEW[posError.row][posError.column].style.backgroundColor = 'red';
     
     setTimeout(() => {
@@ -67,7 +68,7 @@ function errorColorRed(posError) {
 
 //--------> ELIMINAR CIRCULOS Y COLORES (RESTO) DE LAS ETIQUETAS <--------//
 
-function removeRest(){
+export function removeRest(){
     for(const element of HTML_TAGS.PIECES){
         element.style.backgroundColor = '';    
         let pieceHTML = element.innerHTML[0] == '<' || !element.innerHTML ? '' : element.innerHTML[0]
@@ -77,7 +78,7 @@ function removeRest(){
 
 //--------> PINTAR CAMPOS VACIOS Y PIEZAS DEL OTRO EQUIPO QUE SE PUEDEN COMER <--------//
 
-// function paintOptions(piece, tag, turn){
+// export function paintOptions(piece, tag, turn){
 //     let color = colorPiece(piece);
 //     if(color != turn){
 //         tag.style.backgroundColor = 'orange';
@@ -87,7 +88,7 @@ function removeRest(){
 //     }
 // }
 
-function paintOptions(piece, tag, turn){
+export function paintOptions(piece, tag, turn){
     let color = colorPiece(piece);
     const circlePiece = `<div class="fas fa-circle" style="color:${CONFIG_CHESS.color_circlePiece}; opacity: .6;"></div>`
     const circlePosition = `<div class="fas fa-circle" style="color:${CONFIG_CHESS.color_circlePosition};"></div>`;
@@ -102,5 +103,16 @@ function paintOptions(piece, tag, turn){
     }
 }
 
-export { changeToFigures, printChess, orderPieces, errorColorRed, colorPiece, paintOptions, removeRest };
+export function clearConsoleData(){
+    console.API;
 
+    if (typeof console._commandLineAPI !== 'undefined') {
+        console.API = console._commandLineAPI; //chrome
+    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+        console.API = console._inspectorCommandLineAPI; //Safari
+    } else if (typeof console.clear !== 'undefined') {
+        console.API = console;
+    }
+    
+    console.API.clear();
+}

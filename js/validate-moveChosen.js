@@ -1,10 +1,12 @@
-import { validatePieceMovement } from '../main.js';
 import { changeToFigures, errorColorRed, removeRest } from './other-functions.js';
-import { updateMovement } from './update-movementPiece.js'
+import { updateMovement } from './update-movementPiece.js';
+import { validateOption } from '../logic_pieces/functions.js';
+
 
 export function validateChosen(){
     
     let chosenPosition = CHESS[CHOSEN_POSITION.row][CHOSEN_POSITION.column];
+    let castling = false;
 
     // si da click a la misma pieza una vez mas se deseleccionara
     if(CHOSEN_POSITION.row == CHOSEN_PIECE.row && CHOSEN_POSITION.column == CHOSEN_PIECE.column){
@@ -20,26 +22,26 @@ export function validateChosen(){
         MOTION_OPTIONS.length = 0;
         return 
     }
+    
+    
+    // Validar movimiento de las piezas
+    const result = validateOption(CHOSEN_POSITION.row, CHOSEN_POSITION.column, MOTION_OPTIONS)
+    if(!result){
+        // console.log(`El movimiento no es valido para esta pieza ${CHOSEN_PIECE.piece}`);
+        console.log('error');
+        return errorColorRed(CHOSEN_POSITION);
+    }
+
+    if(result == 'castling') castling = true
+    // console.log(`Buen movimiento ${CHOSEN_PIECE.piece}`);
+    removeRest();
+    
+    
+    // Matar pieza
     // La pieza atrapada se busca en los arrays de piezas blancas o negras
     let trappedPiece = (GAME_PROGRESS.turn == 'black') ? 
     PIECES_WHITE.indexOf(chosenPosition) : PIECES_BLACK.indexOf(chosenPosition);
-
-    // Si el campo esta lleno o no es una pieza del equipo contrario ocurrira un error
-    if(chosenPosition.split(" ").join("").length != 0 && trappedPiece == -1){
-        // console.log('Selecciona un campo vacio');
-        return errorColorRed(CHOSEN_POSITION);
-    }
-
-    let result = validatePieceMovement(CHOSEN_PIECE.piece);
-    if(!result){
-        // console.log(`El movimiento no es valido para esta pieza ${CHOSEN_PIECE.piece}`);
-        return errorColorRed(CHOSEN_POSITION);
-    }else{
-        // console.log(`Buen movimiento ${CHOSEN_PIECE.piece}`);
-        removeRest();
-    }
-
-    // Matar pieza
+    
     if(trappedPiece != -1){
         chosenPosition = changeToFigures(chosenPosition);
         if(GAME_PROGRESS.turn == 'white'){
@@ -58,5 +60,5 @@ export function validateChosen(){
     CHESS_VIEW[CHOSEN_PIECE.row][CHOSEN_PIECE.column].style.backgroundColor = '';
 
     // Función para cambiar posicion de pieza
-    return updateMovement(CHOSEN_PIECE, CHOSEN_POSITION);
+    return updateMovement(CHOSEN_PIECE, CHOSEN_POSITION, castling);
 }

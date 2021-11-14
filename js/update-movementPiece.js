@@ -1,13 +1,31 @@
-import { changeToFigures } from './other-functions.js';
+import { changeToFigures, printChess, clearConsoleData } from './other-functions.js';
 
-export function updateMovement(piece, position){
+export function updateMovement(piece, position, castling){
 
-    CHESS[position.row][position.column] = piece.piece;
-    CHESS[piece.row][piece.column] = position.position;
+    if(castling){
+        if(position.column < piece.column){
+            CHESS[piece.row][piece.column - 2] = piece.piece;
+            CHESS[piece.row][piece.column - 1] = position.position;
+            CHESS_VIEW[position.row][piece.column - 2].innerHTML = changeToFigures(piece.piece); 
+            CHESS_VIEW[position.row][piece.column - 1].innerHTML = changeToFigures(position.position);
+        }else{
+            CHESS[piece.row][piece.column + 2] = piece.piece;
+            CHESS[piece.row][piece.column + 1] = position.position;
+            CHESS_VIEW[position.row][piece.column + 2].innerHTML = changeToFigures(piece.piece); 
+            CHESS_VIEW[position.row][piece.column + 1].innerHTML = changeToFigures(position.position);
+        }
+        CHESS[piece.row][piece.column] = '   ';
+        CHESS[position.row][position.column] = '   ';
+        CHESS_VIEW[position.row][piece.column].innerHTML = '';
+        CHESS_VIEW[position.row][position.column].innerHTML = '';
+    }else{
 
-    CHESS_VIEW[position.row][position.column].innerHTML = changeToFigures(piece.piece); 
-    CHESS_VIEW[piece.row][piece.column].innerHTML = changeToFigures(position.position); 
-
+        CHESS[position.row][position.column] = piece.piece;
+        CHESS[piece.row][piece.column] = position.position;
+    
+        CHESS_VIEW[position.row][position.column].innerHTML = changeToFigures(piece.piece); 
+        CHESS_VIEW[piece.row][piece.column].innerHTML = changeToFigures(position.position); 
+    }
 
     piece.row = null;
     piece.column = null;
@@ -31,6 +49,9 @@ export function updateMovement(piece, position){
         CONFIG_CHESS.colorSelectSquare = '#06adf7';
     }
 
-    // printChess(listLetter, CHESS, GAME_PROGRESS);
+
+    clearConsoleData()
+
+    printChess(listLetter, CHESS, GAME_PROGRESS);
 }
 

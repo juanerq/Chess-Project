@@ -26,7 +26,8 @@ function cleanGame(){
 
     // Ultima pieza seleccionada
     CHOSEN_PIECE.piece = '';
-
+    MOTION_OPTIONS.length = 0;
+    
     // Eliminar tablero y piezas muertas del HTML
     HTML_TAGS.CONTAINER_PIECES.innerHTML = '';
     HTML_TAGS.deadPiecesWhite.innerHTML = '';
@@ -43,21 +44,21 @@ function createGameChess(){
     sizeChessCanvas();
     createLabelsPieces();
     orderPiecesScreen(CHESS);
-    // printChess(listLetter, CHESS, GAME_PROGRESS);
+    printChess(listLetter, CHESS, GAME_PROGRESS);
 }
 
 
 //----------------------------------[ VALIDACION DE PIEZAS ]--------------------------------------//
 
-function validatePieceMovement(piece){
+function validatePieceMovement(piece, CHOSEN_PIECE){
     switch (piece) {
-        case 'B-P': case 'W-P': return logicPawn(CHOSEN_POSITION.row, CHOSEN_POSITION.column, CHOSEN_PIECE);
-        case 'B-T': case 'W-T': return logicTower(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
-        case 'B-H': case 'W-H': return logicHorse(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
-        case 'B-B': case 'W-B': return logicBishop(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
-        case 'B-Q': case 'W-Q': return logicQueen(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
-        case 'B-K': case 'W-K': return logicKing(CHOSEN_POSITION.row,CHOSEN_POSITION.column,CHOSEN_PIECE);
-        
+        case 'B-P': case 'W-P': return logicPawn   ( CHOSEN_PIECE );
+        case 'B-T': case 'W-T': return logicTower  ( CHOSEN_PIECE );
+        case 'B-H': case 'W-H': return logicHorse  ( CHOSEN_PIECE );
+        case 'B-B': case 'W-B': return logicBishop ( CHOSEN_PIECE );
+        case 'B-Q': case 'W-Q': return logicQueen  ( CHOSEN_PIECE );
+        case 'B-K': case 'W-K': return logicKing   ( CHOSEN_PIECE );
+
         default: return true;
     }
 }

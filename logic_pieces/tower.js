@@ -1,7 +1,6 @@
-import { calculateOptions, validate } from './functions.js';
+import { saveValidOptions } from './functions.js';
 
-export function logicTower(rowSelec, columnSelec, piece) {   
-    validate.status = false;
+export function logicTower( piece ) {   
 
     const counters = {
         left:  { status: false, cont: piece.column },
@@ -17,12 +16,11 @@ export function logicTower(rowSelec, columnSelec, piece) {
         if( !counters.right.status ) counters.right.cont += 1;
         if( !counters.down.status  ) counters.down.cont  += 1;
 
-        calculateOptions( counters.left  , piece.row          , counters.left.cont  , columnSelec , rowSelec );
-        calculateOptions( counters.right , piece.row          , counters.right.cont , columnSelec , rowSelec );
-        calculateOptions( counters.top   , counters.top.cont  , piece.column        , columnSelec , rowSelec );
-        calculateOptions( counters.down  , counters.down.cont , piece.column        , columnSelec , rowSelec );
+        saveValidOptions( counters.left  , piece.row          , counters.left.cont  , piece);
+        saveValidOptions( counters.right , piece.row          , counters.right.cont , piece);
+        saveValidOptions( counters.top   , counters.top.cont  , piece.column        , piece);
+        saveValidOptions( counters.down  , counters.down.cont , piece.column        , piece);
           
     }
-    return validate.status;
 }
 

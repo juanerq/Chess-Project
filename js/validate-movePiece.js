@@ -2,7 +2,6 @@ import { validatePieceMovement } from '../main.js';
 import { errorColorRed } from './other-functions.js';
 import { paintMotionOptions } from '../logic_pieces/functions.js'
 
-
 export function validatePiece(CHESS, CHOSEN_PIECE, selectedTag){
     let findPiece;
     let piece = CHESS[CHOSEN_PIECE.row][CHOSEN_PIECE.column];
@@ -23,7 +22,7 @@ export function validatePiece(CHESS, CHOSEN_PIECE, selectedTag){
     // Pintar campo seleccionado
     selectedTag.style.backgroundColor = CONFIG_CHESS.colorSelectSquare;
     // Calcular campos donde la pieza se puede mover
-    validatePieceMovement(piece);
+    validatePieceMovement(piece, CHOSEN_PIECE);
     // Pintar los campos
     paintMotionOptions(MOTION_OPTIONS); 
     // console.log(`pieza seleccionada ${piece}`)

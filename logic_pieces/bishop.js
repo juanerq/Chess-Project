@@ -1,7 +1,7 @@
-import { calculateOptions, validate } from './functions.js';
+import { saveValidOptions } from './functions.js';
 
-export function logicBishop(rowSelec, columnSelec, piece){
-    validate.status = false;
+export function logicBishop(piece){
+
     const counters = {
         topLeft:   { status: false, contRow: piece.row, contColumn: piece.column },
         topRight:  { status: false, contRow: piece.row, contColumn: piece.column },
@@ -16,12 +16,11 @@ export function logicBishop(rowSelec, columnSelec, piece){
         if( !counters.downLeft.status  ) counters.downLeft.contRow  += 1; counters.downLeft.contColumn  -= 1; 
         if( !counters.downRight.status ) counters.downRight.contRow += 1; counters.downRight.contColumn += 1; 
 
-        calculateOptions( counters.topLeft   , counters.topLeft.contRow   , counters.topLeft.contColumn   , columnSelec , rowSelec );
-        calculateOptions( counters.topRight  , counters.topRight.contRow  , counters.topRight.contColumn  , columnSelec , rowSelec );
-        calculateOptions( counters.downLeft  , counters.downLeft.contRow  , counters.downLeft.contColumn  , columnSelec , rowSelec );
-        calculateOptions( counters.downRight , counters.downRight.contRow , counters.downRight.contColumn , columnSelec , rowSelec );
+        saveValidOptions( counters.topLeft   , counters.topLeft.contRow   , counters.topLeft.contColumn   , piece);
+        saveValidOptions( counters.topRight  , counters.topRight.contRow  , counters.topRight.contColumn  , piece);
+        saveValidOptions( counters.downLeft  , counters.downLeft.contRow  , counters.downLeft.contColumn  , piece);
+        saveValidOptions( counters.downRight , counters.downRight.contRow , counters.downRight.contColumn , piece);
           
     }
-    return validate.status;
 }
 
