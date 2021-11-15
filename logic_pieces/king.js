@@ -19,35 +19,37 @@ export function logicKing( piece ){
     }
 }
 
-export function protectKing(rowSelec, columnSelec, piece){
-    let result = true;
-    
-    if(piece.piece == 'W-K' || piece.piece == 'B-K'){
-        OPTIONS_KILL.length = 0;
-        for(let row = 0; row < CONFIG_CHESS.num_rows; row++){
-            for(let column = 0; column < CONFIG_CHESS.num_columns; column++){
-                
-                let color = colorPiece(CHESS[row][column]);
+export function protectKing(rowSelec, columnSelec) {
 
-                if(color != GAME_PROGRESS.turn && color != ''){
-                    validatePieceMovement(CHESS[row][column], { row, column, piece: CHESS[row][column]});
+    OPTIONS_KILL.length = 0;
+    const result = [];
+    for(let row = 0; row < CONFIG_CHESS.num_rows; row++){
+        for(let column = 0; column < CONFIG_CHESS.num_columns; column++){
+            
+            let piece = CHESS[row][column];
+            let color = colorPiece(piece);
+            
+            if(color != GAME_PROGRESS.turn && color != ''){
+                validatePieceMovement(piece, { row, column, piece });
 
-                    OPTIONS_KILL.forEach(element => {
-                        const row = element.split(',')[0]
-                        const column = element.split(',')[1]
-                        if(rowSelec == row && columnSelec == column){
-                            console.log(rowSelec,'/',columnSelec);
-                            result = false;
-                        }
-                    })
-
-                }
+                OPTIONS_KILL.forEach(element => {
+                    const rowOption = element.split(',')[0]
+                    const columnOption = element.split(',')[1]
+                    if(rowSelec == rowOption && columnSelec == columnOption){
+                        result.push(`${row},${column}`);
+                    }
+                })
+                OPTIONS_KILL.length = 0;
             }
         }
     }
     return result;
 }
 
+export const movedPieces = {
+    white: { king: false, towerLeft: false, towerRight: false },
+    black: { king: false, towerLeft: false, towerRight: false }
+}
 
 export function castling( rowSelec, columnSelec, piece ){
 
@@ -56,28 +58,30 @@ export function castling( rowSelec, columnSelec, piece ){
     let tower = colorPiece(CHESS[rowSelec][columnSelec]);
 
     if(king == tower){
-        
-        if(columnSelec < piece.column){
-            let resultKing = protectKing(rowSelec, piece.column - 2, piece) 
-            if(!resultKing) return result = false; 
+        if(movedPieces[king].king) return result = false; 
+        if(columnSelec < piece.column && !movedPieces[king].towerLeft){
             
             for(let i = piece.column - 1; i > 0; i--){
                 if(CHESS[piece.row][i].split(" ").join("").length != 0){
                     return result = false
                 }
             }
-
-        }else{ 
-            let resultKing = protectKing(rowSelec, piece.column + 2, piece) 
-            if(!resultKing) return result = false; 
-
+            let enemyPieces = protectKing(rowSelec, piece.column - 2, piece) 
+            if(enemyPieces.length > 0) return result = false; 
+            
+        }else if(columnSelec > piece.column && !movedPieces[king].towerRight){ 
+            
             for(let i = piece.column + 1; i < CONFIG_CHESS.num_columns - 1; i++){
                 if(CHESS[piece.row][i].split(" ").join("").length != 0){
                     return result = false
                 }
             }
+            let enemyPieces = protectKing(rowSelec, piece.column + 2, piece) 
+            if(enemyPieces.length > 0) return result = false; 
+        }else{
+            return result = false;
         }
         return result;
     }
-    return result = false
+    return result = false;
 }

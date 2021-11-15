@@ -1,12 +1,11 @@
 import { saveValidOptions } from './functions.js';
 
 export function logicBishop(piece){
-
     const counters = {
-        topLeft:   { status: false, contRow: piece.row, contColumn: piece.column },
-        topRight:  { status: false, contRow: piece.row, contColumn: piece.column },
-        downLeft:  { status: false, contRow: piece.row, contColumn: piece.column },
-        downRight: { status: false, contRow: piece.row, contColumn: piece.column }
+        topLeft:   { status: false, contRow: piece.row, contColumn: piece.column , foundKing: false },
+        topRight:  { status: false, contRow: piece.row, contColumn: piece.column , foundKing: false },
+        downLeft:  { status: false, contRow: piece.row, contColumn: piece.column , foundKing: false },
+        downRight: { status: false, contRow: piece.row, contColumn: piece.column , foundKing: false }
     }
 
     while(!counters.topLeft.status || !counters.topRight.status || !counters.downLeft.status || !counters.downRight.status){

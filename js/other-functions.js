@@ -43,13 +43,13 @@ export function orderPieces(posPieces, colorPiece = 'white'){
 //--------> IMPRIMIR TABLERO <--------//
 
 export function printChess(listLetter, chess, GAME_PROGRESS){
-    console.log(`[${listLetter}]`);
-    for(let index in chess){
-        console.log(`[${chess[index]}] ${1 + parseInt(index)}`);
-    }
-    console.log(`[ Fichas comidas ]
-White => ${GAME_PROGRESS.deadPiecesWhite} 
-Black => ${GAME_PROGRESS.deadPiecesBlack}`);
+//     console.log(`[${listLetter}]`);
+//     for(let index in chess){
+//         console.log(`[${chess[index]}] ${1 + parseInt(index)}`);
+//     }
+//     console.log(`[ Fichas fuera de juego ]
+// Black => ${GAME_PROGRESS.deadPiecesBlack}
+// White => ${GAME_PROGRESS.deadPiecesWhite}`);
 }
 
 //--------> VISUALIZAR ( COLOR ROJO ) CUANDO NO SE PUEDE SELECCIONA UN CAMPO <--------//
@@ -104,15 +104,15 @@ export function paintOptions(piece, tag, turn){
 }
 
 export function clearConsoleData(){
-    console.API;
+    // console.API;
 
-    if (typeof console._commandLineAPI !== 'undefined') {
-        console.API = console._commandLineAPI; //chrome
-    } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
-        console.API = console._inspectorCommandLineAPI; //Safari
-    } else if (typeof console.clear !== 'undefined') {
-        console.API = console;
-    }
+    // if (typeof console._commandLineAPI !== 'undefined') {
+    //     console.API = console._commandLineAPI; //chrome
+    // } else if (typeof console._inspectorCommandLineAPI !== 'undefined') {
+    //     console.API = console._inspectorCommandLineAPI; //Safari
+    // } else if (typeof console.clear !== 'undefined') {
+    //     console.API = console;
+    // }
     
-    console.API.clear();
+    // console.API.clear();
 }

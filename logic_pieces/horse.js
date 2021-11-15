@@ -17,6 +17,7 @@ export function logicHorse(piece) {
                     OPTIONS_KILL.push(`${rows},${columns}`)
     
                 } 
+                OPTIONS_KILL.push(`${rows},${columns}`)
             }
 
         }

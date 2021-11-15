@@ -5,7 +5,7 @@ let columnSelecPiece;
 
 export function logicPawn( piece ) {
     let color = colorPiece(piece.piece);
-
+    let colorPosition;
     const pos = {
         square1: 0,
         square2: 0,
@@ -37,11 +37,13 @@ export function logicPawn( piece ) {
         }
         OPTIONS_KILL.push(`${pos.square1},${pos.column + 1}`)
         OPTIONS_KILL.push(`${pos.square1},${pos.column - 1}`)
-        if((piece.column + 1) < CONFIG_CHESS.num_columns && CHESS[pos.square1][piece.column + 1].split(" ").join("").length != 0 ) {
+        colorPosition = colorPiece(CHESS[pos.square1][pos.column + 1]);
+        if((piece.column + 1) < CONFIG_CHESS.num_columns && CHESS[pos.square1][piece.column + 1].split(" ").join("").length != 0 && color != colorPosition) {
             
             MOTION_OPTIONS.push(`${pos.square1},${pos.column + 1}`)
         }
-        if(pos.square1 >= 0 && (piece.column - 1) >= 0 && CHESS[pos.square1][piece.column - 1].split(" ").join("").length != 0 ) {
+        colorPosition = colorPiece(CHESS[pos.square1][pos.column - 1]);
+        if(pos.square1 >= 0 && (piece.column - 1) >= 0 && CHESS[pos.square1][piece.column - 1].split(" ").join("").length != 0 && color != colorPosition) {
             MOTION_OPTIONS.push(`${pos.square1},${pos.column - 1}`)
         }
     }

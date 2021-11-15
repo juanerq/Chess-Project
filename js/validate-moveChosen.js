@@ -25,10 +25,9 @@ export function validateChosen(){
     
     
     // Validar movimiento de las piezas
-    const result = validateOption(CHOSEN_POSITION.row, CHOSEN_POSITION.column, MOTION_OPTIONS)
+    const result = validateOption(CHOSEN_POSITION, CHOSEN_PIECE, MOTION_OPTIONS)
     if(!result){
         // console.log(`El movimiento no es valido para esta pieza ${CHOSEN_PIECE.piece}`);
-        console.log('error');
         return errorColorRed(CHOSEN_POSITION);
     }
 
