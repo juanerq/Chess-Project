@@ -39,6 +39,7 @@ export function protectKing(rowSelec, columnSelec) {
                         result.push(`${row},${column}`);
                     }
                 })
+                
                 OPTIONS_KILL.length = 0;
             }
         }
@@ -60,13 +61,13 @@ export function castling( rowSelec, columnSelec, piece ){
     if(king == tower){
         if(movedPieces[king].king) return result = false; 
         if(columnSelec < piece.column && !movedPieces[king].towerLeft){
-            
             for(let i = piece.column - 1; i > 0; i--){
                 if(CHESS[piece.row][i].split(" ").join("").length != 0){
                     return result = false
                 }
             }
-            let enemyPieces = protectKing(rowSelec, piece.column - 2, piece) 
+            let enemyPieces = protectKing(rowSelec, piece.column - 2, piece); 
+            MOTION_OPTIONS.length = 0;
             if(enemyPieces.length > 0) return result = false; 
             
         }else if(columnSelec > piece.column && !movedPieces[king].towerRight){ 
@@ -76,7 +77,8 @@ export function castling( rowSelec, columnSelec, piece ){
                     return result = false
                 }
             }
-            let enemyPieces = protectKing(rowSelec, piece.column + 2, piece) 
+            let enemyPieces = protectKing(rowSelec, piece.column + 2, piece); 
+            MOTION_OPTIONS.length = 0;
             if(enemyPieces.length > 0) return result = false; 
         }else{
             return result = false;

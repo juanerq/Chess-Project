@@ -5,11 +5,11 @@ import { castling, movedPieces, protectKing } from './king.js'
 //--------> GUARDA LAS OPCIONES VALIDAS DE MOVIMIENTOS PARA LA [ TORRE - ALFIL - DAMA ] <--------//
 
 export function saveValidOptions( direction, row, column, piece ){
+
     let colorPieceSelec = colorPiece(piece.piece);
     if( (row >= 0 && row < CONFIG_CHESS.num_rows) && (column >= 0 && column < CONFIG_CHESS.num_columns) ){
         
         if( !direction.status ){
-            
             let colorPosition = colorPiece(CHESS[row][column]);
             if(colorPosition == colorPieceSelec) {
                 OPTIONS_KILL.push(`${row},${column}`);
@@ -54,16 +54,13 @@ export function validateOption(position, piece, options){
     // Enroque: si la pieza selecionada es el Rey y la posición es una Torre
     if(piece.piece[2] == 'K' && CHESS[position.row][position.column][2] == 'T'){
         let resultKing = castling(position.row, position.column, piece);
-        if(resultKing == false) {
-            result = false; 
-        }else{
-            return result = 'castling';
-        }
+
+        if(resultKing) return result = 'castling';
     }
-    
+
     result = options.find(element => position.row == element.split(',')[0] && position.column == element.split(',')[1]);
 
-    if(result){
+    if(result != undefined){
         // Cambiar peon por otra ficha( la función funciona si la pieza es un peon )
         showFormModal(position.row, position.column, piece);
 
@@ -92,11 +89,13 @@ export function validateOption(position, piece, options){
 
 
 export function checkmate(){ 
-
+    // Se busca el rey
     for(let row = 0; row < CONFIG_CHESS.num_rows; row++){
         for(let column = 0; column < CONFIG_CHESS.num_columns; column++){
+
             let color = colorPiece(CHESS[row][column]);
             let typePiece = CHESS[row][column];
+
             if(color == GAME_PROGRESS.turn && typePiece[2] == 'K'){
 
                 let enemyPieces = protectKing(row, column);
