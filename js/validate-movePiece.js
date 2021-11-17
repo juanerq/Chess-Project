@@ -20,7 +20,7 @@ export function validatePiece(CHESS, CHOSEN_PIECE, selectedTag){
     }
     CHOSEN_PIECE.piece = piece;
     // Pintar campo seleccionado
-    selectedTag.style.backgroundColor = CONFIG_CHESS.colorSelectSquare;
+    selectedTag.style.backgroundColor = jake && piece[2] == 'K' ? CONFIG_CHESS.color_selectJake : CONFIG_CHESS.colorSelectSquare
     // Calcular campos donde la pieza se puede mover
     validatePieceMovement(piece, CHOSEN_PIECE);
     // Pintar los campos

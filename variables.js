@@ -39,9 +39,12 @@ const CONFIG_CHESS = {
     color_square1: '#e1d0eb',
     color_square2: '#735594',
     colorSelectSquare: '#0da2ef',
+    color_selectJake: 'orange',
 
     color_circlePiece: '#ff0000',
-    color_circlePosition: '#06adf7'
+    color_circlePosition: '#06adf7',
+    color_circleJake: '#fa0000'
+
 }
 
 const GAME_PROGRESS = {
@@ -64,3 +67,5 @@ const CHOSEN_POSITION = {
 
 const MOTION_OPTIONS = [];
 const OPTIONS_KILL = [];
+
+let jake = false; 

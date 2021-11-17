@@ -11,7 +11,7 @@ export function validateChosen(){
     // si da click a la misma pieza una vez mas se deseleccionara
     if(CHOSEN_POSITION.row == CHOSEN_PIECE.row && CHOSEN_POSITION.column == CHOSEN_PIECE.column){
         // Se quita el color(cualquier color) de todos los campos
-        removeRest();
+        removeRest(jake);
         // console.log(`pieza deseleccionada ${chosenPosition}`);
         // Se borra la pieza seleccionada
         CHOSEN_PIECE.piece = '';

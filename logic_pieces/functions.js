@@ -1,4 +1,4 @@
-import { colorPiece, paintOptions } from '../js/other-functions.js';
+import { colorPiece, paintOptions, removeRest } from '../js/other-functions.js';
 import { showFormModal } from './pawn.js'
 import { castling, movedPieces, protectKing } from './king.js'
 
@@ -67,7 +67,6 @@ export function validateOption(position, piece, options){
         // Proteger al Rey
         if(piece.piece[2] == 'K'){
             let enemyPieces = protectKing(position.row, position.column);
-            console.log(enemyPieces);
             if(enemyPieces.length > 0) result = false;
         }
 
@@ -97,13 +96,18 @@ export function checkmate(){
             let typePiece = CHESS[row][column];
 
             if(color == GAME_PROGRESS.turn && typePiece[2] == 'K'){
-
                 let enemyPieces = protectKing(row, column);
-                console.log(enemyPieces);
-                for(const e of enemyPieces){
-                    paintOptions(CHESS[e.split(',')[0]][e.split(',')[1]], CHESS_VIEW[e.split(',')[0]][e.split(',')[1]], GAME_PROGRESS.turn);
-                }
+                if(enemyPieces.length > 0){
 
+                    jake = true;
+                    CHESS_VIEW[row][column].style.backgroundColor = 'orange';  
+                    for(const e of enemyPieces){
+                        paintOptions(CHESS[e.split(',')[0]][e.split(',')[1]], CHESS_VIEW[e.split(',')[0]][e.split(',')[1]], GAME_PROGRESS.turn, jake);
+                    }   
+                    return;    
+                }
+                jake = false;
+                removeRest(jake)
             }
         }
     }
