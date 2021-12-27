@@ -1,5 +1,5 @@
 import { changeToFigures, printChess, clearConsoleData } from './other-functions.js';
-import { checkmate } from '../logic_pieces/functions.js';
+import { kingJake } from '../logic_pieces/functions.js';
 
 export function updateMovement(piece, position, castling){  
 
@@ -33,20 +33,20 @@ export function updateMovement(piece, position, castling){
     if(GAME_PROGRESS.turn == 'white'){
 
         GAME_PROGRESS.turn = 'black';
-        HTML_TAGS.CONTAINER_CHESS.style.border = '4px solid #fff500';
-        CONFIG_CHESS.color_circlePosition = '#fff500';
-        CONFIG_CHESS.colorSelectSquare = '#fff500';
+        HTML_TAGS.CONTAINER_CHESS.style.border = `4px solid ${colors.yellow}`;
+        CONFIG_CHESS.color_circlePosition = colors.yellow;
+        CONFIG_CHESS.colorSelectSquare = colors.yellow;
 
     }else if(GAME_PROGRESS.turn == 'black'){
 
         GAME_PROGRESS.turn = 'white';
-        HTML_TAGS.CONTAINER_CHESS.style.border = '4px solid #06adf7';
-        CONFIG_CHESS.color_circlePosition = '#06adf7';
-        CONFIG_CHESS.colorSelectSquare = '#06adf7';
+        HTML_TAGS.CONTAINER_CHESS.style.border = `4px solid ${colors.blue}`;
+        CONFIG_CHESS.color_circlePosition = colors.blue;
+        CONFIG_CHESS.colorSelectSquare = colors.blue;
 
     }
 
-    checkmate()
+    kingJake()
 
     piece.row = null;
     piece.column = null;

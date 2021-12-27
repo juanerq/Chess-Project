@@ -17,7 +17,11 @@ const HTML_TAGS = {
     deadPiecesBlack: document.getElementById('dead_pieces_black'),
 
     formModal: document.getElementById('formModal'), 
-    selecPieces: document.querySelectorAll('.selecPieces')
+    selecPieces: document.querySelectorAll('.selecPieces'),
+
+    end_game: document.getElementById('end_game'),
+    winning_color: document.getElementById('color')
+
 }
 
 const CHESS = [];
@@ -28,6 +32,14 @@ const listLetter = [];
 
 const PIECES_BLACK = ['B-P', 'B-T', 'B-H', 'B-B', 'B-K', 'B-Q'];                     
 const PIECES_WHITE = ['W-P', 'W-T', 'W-H', 'W-B', 'W-K', 'W-Q'];
+const colors = {
+    
+    yellow: '#fff500',
+    blue: '#06adf7',
+    orange: 'orange',  
+    redP: '#ff0000',
+    redJ: '#fa0000',
+}
 
 const CONFIG_CHESS = {
     num_columns: 0,
@@ -38,19 +50,22 @@ const CONFIG_CHESS = {
 
     color_square1: '#e1d0eb',
     color_square2: '#735594',
-    colorSelectSquare: '#0da2ef',
-    color_selectJake: 'orange',
+    colorSelectSquare: colors.blue,
+    color_selectJake: colors.orange,
 
-    color_circlePiece: '#ff0000',
-    color_circlePosition: '#06adf7',
-    color_circleJake: '#fa0000'
+    color_circlePiece: colors.redP,
+    color_circlePosition: colors.blue,
+    color_circleJake: colors.redJ
 
 }
+
 
 const GAME_PROGRESS = {
     turn: 'white',
     deadPiecesWhite: [],
-    deadPiecesBlack: []
+    deadPiecesBlack: [],
+    jake: false,
+    checkmate: false
 }
 
 const CHOSEN_PIECE = {
@@ -67,5 +82,3 @@ const CHOSEN_POSITION = {
 
 const MOTION_OPTIONS = [];
 const OPTIONS_KILL = [];
-
-let jake = false; 

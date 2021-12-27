@@ -50,7 +50,8 @@ export function printChess(listLetter, chess, GAME_PROGRESS){
     console.log(`[ Fichas fuera de juego ]
 Black => ${GAME_PROGRESS.deadPiecesBlack}
 White => ${GAME_PROGRESS.deadPiecesWhite}`);
-if(jake) console.log(`Jake to ${GAME_PROGRESS.turn} team`)
+if(GAME_PROGRESS.jake) console.log(`Jake to ${GAME_PROGRESS.turn} team`)
+if(GAME_PROGRESS.checkmate) console.log(`Jake Mate... Winner ${GAME_PROGRESS.turn} team`)
 }
 
 //--------> VISUALIZAR ( COLOR ROJO ) CUANDO NO SE PUEDE SELECCIONA UN CAMPO <--------//
@@ -78,12 +79,6 @@ export function removeRest(jake = false){
         element.style.backgroundColor = !jake ? '' : 
             element.style.backgroundColor != CONFIG_CHESS.color_selectJake ? '' : element.style.backgroundColor ;   
             
-        // if(!jake){
-        //     element.style.backgroundColor = '';
-        // }else if(element.style.backgroundColor != 'orange'){
-        //     element.style.backgroundColor = '';
-        // }
-        
         element.innerHTML = circlePosition != -1 ? '' : 
             element.innerHTML = circlePiece != -1 ? element.innerHTML[0] : element.innerHTML;      
         
@@ -95,14 +90,14 @@ export function removeRest(jake = false){
 
 //--------> PINTAR CAMPOS VACIOS Y PIEZAS DEL OTRO EQUIPO QUE SE PUEDEN COMER <--------//
 
-export function paintOptions(piece, tag, turn, jake = false){
+export function paintOptions(piece, tag, game){
     let color = colorPiece(piece);
     const circlePiece = `<div class="fas fa-circle" style="color:${CONFIG_CHESS.color_circlePiece}; opacity: .6;"></div>`
     const circlePosition = `<div class="fas fa-circle" style="color:${CONFIG_CHESS.color_circlePosition};"></div>`;
     const circleJake = `<div class="fas fa-circle" style="color:${CONFIG_CHESS.color_circleJake}; opacity: .5;"></div>`;
 
     
-    if(jake){
+    if(game.jake){
         // CHESS_VIEW[CHOSEN_PIECE.row][CHOSEN_PIECE.column].style.backgroundColor = 'orange';
         tag.innerHTML = tag.innerHTML[0];
         return tag.innerHTML += circleJake;
@@ -112,7 +107,7 @@ export function paintOptions(piece, tag, turn, jake = false){
         return tag.innerHTML = circlePosition;
     }
     // Si hay una ficha del equipo contrario en el campo
-    if(color != turn && tag.innerHTML.length < 1){   
+    if(color != game.turn && tag.innerHTML.length < 4){   
         return tag.innerHTML += circlePiece;
     }
 
@@ -130,4 +125,15 @@ export function clearConsoleData(){
     }
     
     console.API.clear();
+}
+
+export function endGame(winner){
+    let winning_color = winner == 'white' ? colors.blue : colors.yellow;
+    HTML_TAGS.CONTAINER_CHESS.style.pointerEvents = 'none';
+
+    HTML_TAGS.winning_color.innerHTML = winner
+    HTML_TAGS.end_game.style.backgroundColor = winning_color;
+    HTML_TAGS.CONTAINER_CHESS.style.border = `4px solid ${winning_color}`;
+    HTML_TAGS.end_game.style.display = 'flex';
+
 }

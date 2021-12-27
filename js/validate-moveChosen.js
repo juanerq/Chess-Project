@@ -1,7 +1,7 @@
-import { changeToFigures, errorColorRed, removeRest } from './other-functions.js';
+import { changeToFigures, errorColorRed, removeRest, endGame } from './other-functions.js';
 import { updateMovement } from './update-movementPiece.js';
 import { validateOption } from '../logic_pieces/functions.js';
-
+import { showFormModal } from '../logic_pieces/pawn.js';
 
 export function validateChosen(){
     
@@ -11,7 +11,7 @@ export function validateChosen(){
     // si da click a la misma pieza una vez mas se deseleccionara
     if(CHOSEN_POSITION.row == CHOSEN_PIECE.row && CHOSEN_POSITION.column == CHOSEN_PIECE.column){
         // Se quita el color(cualquier color) de todos los campos
-        removeRest(jake);
+        removeRest(GAME_PROGRESS.jake);
         // console.log(`pieza deseleccionada ${chosenPosition}`);
         // Se borra la pieza seleccionada
         CHOSEN_PIECE.piece = '';
@@ -32,7 +32,9 @@ export function validateChosen(){
     }
 
     if(result == 'castling') castling = true
-    // console.log(`Buen movimiento ${CHOSEN_PIECE.piece}`);
+    // Cambiar peon por otra ficha( la función funciona si la pieza es un peon )
+    if(GAME_PROGRESS.checkmate || CHESS[result.split(',')[0]][result.split(',')[1]][2] == 'K') return endGame(GAME_PROGRESS.turn);
+    showFormModal(CHOSEN_POSITION.row, CHOSEN_POSITION.column, CHOSEN_PIECE);
     removeRest();
     
     

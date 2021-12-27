@@ -1,4 +1,4 @@
-import { printChess } from './js/other-functions.js';
+import { printChess, clearConsoleData } from './js/other-functions.js';
 import { validateSizeChess } from './js/validate-size.js'
 import { createChessArray, putPiecesArray } from './js/create-chessArray.js'
 import { sizeChessCanvas } from './js/create-canvas.js';
@@ -23,6 +23,8 @@ function cleanGame(){
     GAME_PROGRESS.turn = 'white';
     GAME_PROGRESS.deadPiecesWhite.length = 0;
     GAME_PROGRESS.deadPiecesBlack.length = 0;
+    GAME_PROGRESS.jake = false;
+    GAME_PROGRESS.checkmate = false;
 
     // Ultima pieza seleccionada
     CHOSEN_PIECE.piece = '';
@@ -33,7 +35,18 @@ function cleanGame(){
     HTML_TAGS.deadPiecesWhite.innerHTML = '';
     HTML_TAGS.deadPiecesBlack.innerHTML = '';
     HTML_TAGS.ctx.clearRect(0, 0, HTML_TAGS.canvas.width, HTML_TAGS.canvas.height);
+    
+    HTML_TAGS.end_game.style.display = 'none';
+    HTML_TAGS.formModal.style.display = 'none';
+    HTML_TAGS.CONTAINER_CHESS.style.pointerEvents = '';
+    HTML_TAGS.CONTAINER_CHESS.style.border = `4px solid ${colors.blue}`;
+
+    CONFIG_CHESS.color_circlePosition = colors.blue;
+    CONFIG_CHESS.colorSelectSquare = colors.blue;
+
+    clearConsoleData()
 }
+        
 
 function createGameChess(){
     cleanGame();

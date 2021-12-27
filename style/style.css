@@ -30,14 +30,7 @@ body{
     position: relative;
 
 }
-/* .column div{
-    font-weight: 500;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    color: #000;
-} */
+
 .fa-circle{
     position: absolute;
     font-size: 70%;
@@ -122,6 +115,34 @@ button{
     font-size: 16px;
     box-shadow: 3px 3px 0px #663399;
 }
+
+#end_game{
+    display: none;
+    justify-content: space-evenly;
+    align-items: center;
+
+    z-index: 100;
+    width: 270px;
+    height: 90px;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 10px;
+    background-color:  #06adf7;
+    box-shadow: 0 0 4px 3px #00000065;
+    opacity: 0.91;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+#end_game h2{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 button:hover{
     box-shadow: 3px 3px 0px rgb(255, 255, 255);
     background-color: #663399;

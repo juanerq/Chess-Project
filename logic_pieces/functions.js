@@ -1,5 +1,5 @@
-import { colorPiece, paintOptions, removeRest } from '../js/other-functions.js';
-import { showFormModal } from './pawn.js'
+import { colorPiece, paintOptions, removeRest, endGame } from '../js/other-functions.js';
+import { validatePieceMovement } from '../main.js';
 import { castling, movedPieces, protectKing } from './king.js'
 
 //--------> GUARDA LAS OPCIONES VALIDAS DE MOVIMIENTOS PARA LA [ TORRE - ALFIL - DAMA ] <--------//
@@ -61,9 +61,6 @@ export function validateOption(position, piece, options){
     result = options.find(element => position.row == element.split(',')[0] && position.column == element.split(',')[1]);
 
     if(result != undefined){
-        // Cambiar peon por otra ficha( la función funciona si la pieza es un peon )
-        showFormModal(position.row, position.column, piece);
-
         // Proteger al Rey
         if(piece.piece[2] == 'K'){
             let enemyPieces = protectKing(position.row, position.column);
@@ -87,7 +84,7 @@ export function validateOption(position, piece, options){
 }
 
 
-export function checkmate(){ 
+export function kingJake(){ 
     // Se busca el rey
     for(let row = 0; row < CONFIG_CHESS.num_rows; row++){
         for(let column = 0; column < CONFIG_CHESS.num_columns; column++){
@@ -99,16 +96,41 @@ export function checkmate(){
                 let enemyPieces = protectKing(row, column);
                 if(enemyPieces.length > 0){
 
-                    jake = true;
+                    GAME_PROGRESS.jake = true;
+                    let resultCheckmate = checkmate(row, column);
+                    if(resultCheckmate){
+                        GAME_PROGRESS.checkmate = true;
+                        GAME_PROGRESS.turn = GAME_PROGRESS.turn == 'white' ? 'black' : 'white';
+                        return endGame(GAME_PROGRESS.turn);
+                    }
                     CHESS_VIEW[row][column].style.backgroundColor = 'orange';  
-                    for(const e of enemyPieces){
-                        paintOptions(CHESS[e.split(',')[0]][e.split(',')[1]], CHESS_VIEW[e.split(',')[0]][e.split(',')[1]], GAME_PROGRESS.turn, jake);
+                    for(const element of enemyPieces){
+                        const rowOption = element.split(',')[0]
+                        const columnOption = element.split(',')[1]
+                        paintOptions(CHESS[rowOption][columnOption], CHESS_VIEW[rowOption][columnOption], GAME_PROGRESS);
                     }   
                     return;    
                 }
-                jake = false;
-                removeRest(jake)
+                GAME_PROGRESS.jake = false;
+                return removeRest(GAME_PROGRESS.jake)
             }
         }
     }
+}
+
+function checkmate(rowKing, columnKing){
+    let result = true;
+    MOTION_OPTIONS.length = 0;
+    validatePieceMovement('W-K', { row:rowKing, column: columnKing, piece: 'W-K' });
+
+    MOTION_OPTIONS.forEach(element => {
+        const rowOption = element.split(',')[0]
+        const columnOption = element.split(',')[1]
+        let enemyPieces = protectKing(rowOption, columnOption);
+
+        if(enemyPieces.length == 0) {
+            return result = false;
+        }
+    })
+    return result;
 }
